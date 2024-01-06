@@ -9,7 +9,7 @@ public class Customer {
     private int age;
     //    public List<Flight> flightsRegisteredByUser;
     public List<Integer> numOfTicketsBookedByUser;
-     public static final List<Customer> customerCollection = User.getCustomersCollection();
+//     public static final List<Customer> customerCollection = User.getCustomersCollection();
 
     Customer() {
         this.userID = null;
@@ -99,6 +99,6 @@ public class Customer {
         String address = read.nextLine();
         System.out.print("Enter your age :\t");
         int age = read.nextInt();
-        customerCollection.add(new Customer(name, email, password, phone, address, age));
+//        customerCollection.add(new Customer(name, email, password, phone, address, age));
     }
 }
