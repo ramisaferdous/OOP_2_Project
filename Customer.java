@@ -9,7 +9,7 @@ public class Customer {
     private int age;
     //    public List<Flight> flightsRegisteredByUser;
     public List<Integer> numOfTicketsBookedByUser;
-//    public static final List<Customer> customerCollection = User.getCustomersCollection();
+     public static final List<Customer> customerCollection = User.getCustomersCollection();
 
     Customer() {
         this.userID = null;
@@ -82,5 +82,23 @@ public class Customer {
 
     public void setAge(int age) {
         this.age = age;
+    }
+    public void addNewCustomer() {
+        System.out.printf("\n\n\n%60s ++++++++++++++ Welcome to the Customer Registration Portal ++++++++++++++", "");
+        Scanner read = new Scanner(System.in);
+        System.out.print("\nEnter your name :\t");
+        String name = read.nextLine();
+        System.out.print("Enter your email address :\t");
+        String email = read.nextLine();
+
+        System.out.print("Enter your Password :\t");
+        String password = read.nextLine();
+        System.out.print("Enter your Phone number :\t");
+        String phone = read.nextLine();
+        System.out.print("Enter your address :\t");
+        String address = read.nextLine();
+        System.out.print("Enter your age :\t");
+        int age = read.nextInt();
+        customerCollection.add(new Customer(name, email, password, phone, address, age));
     }
 }
