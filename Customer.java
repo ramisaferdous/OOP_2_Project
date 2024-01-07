@@ -83,6 +83,9 @@ public class Customer {
     public void setAge(int age) {
         this.age = age;
     }
+    private String toString(int i) {
+        return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i, randomIDDisplay(userID), name, age, email, address, phone);
+    }
     public void addNewCustomer() {
         System.out.printf("\n\n\n%60s ++++++++++++++ Welcome to the Customer Registration Portal ++++++++++++++", "");
         Scanner read = new Scanner(System.in);
@@ -100,5 +103,27 @@ public class Customer {
         System.out.print("Enter your age :\t");
         int age = read.nextInt();
         customerCollection.add(new Customer(name, email, password, phone, address, age));
+    }
+    String randomIDDisplay(String randomID) {
+        StringBuilder newString = new StringBuilder();
+        for (int i = 0; i <= randomID.length(); i++) {
+            if (i == 3) {
+                newString.append(" ").append(randomID.charAt(i));
+            } else if (i < randomID.length()) {
+                newString.append(randomID.charAt(i));
+            }
+        }
+        return newString.toString();
+    }
+    public void displayCustomersData() {
+
+        Iterator<Customer> iterator = customerCollection.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            i++;
+            Customer c = iterator.next();
+            System.out.println(c.toString(i));
+            System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
+        }
     }
 }
