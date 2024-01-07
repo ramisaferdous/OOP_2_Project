@@ -8,7 +8,7 @@ public class User{
     public static List<Customer> getCustomersCollection() {
         return customersCollection;
     }
-    private static void main(String[] args) {
+    public  static void main(String[] args) {
         int countNumOfUsers = 1;
         Permissions p1 = new Permissions();
         Train t1 = new Train();
@@ -40,16 +40,49 @@ public class User{
                     System.out.println("You've standard/default privileges to access the data... You can just view customers data..." + "Can't perform any actions on them....");
                     c1.displayCustomersData();
                 }
+                else {
+                    System.out.printf("%-20sLogged in Successfully as \"%s\"..... For further Proceedings, enter a value from below....", "", username);
+
+                do {
+                    System.out.printf("%-30s (a) Enter 1 to add new Passenger....\n", "");
+                    System.out.printf("%-30s (b) Enter 2 to search a Passenger....\n", "");
+                    System.out.printf("%-30s (c) Enter 3 to update the Data of the Passenger....\n", "");
+                    System.out.printf("%-30s (d) Enter 4 to delete a Passenger....\n", "");
+                    System.out.printf("%-30s (e) Enter 5 to Display all Passengers....\n", "");
+                    System.out.printf("%-30s (g) Enter 0 to Go back to the Main Menu/Logout....\n", "");
+                    desiredOption = read.nextInt();
+                    if (desiredOption == 1) {
+                        c1.addNewCustomer();
+                    }
+                    else if (desiredOption == 2) {
+                        c1.displayCustomersData();
+                        System.out.print("Enter the CustomerID to Search :\t");
+                        String customerID = read1.nextLine();
+                        System.out.println();
+                        c1.searchUser(customerID);
+
+                    }
+                }
+                while (desiredOption != 0);
+                }
+            }
+            else if (desiredOption == 2)
+            {
             }
         }
-        while (desiredOption != 0);
-    }
+            while (desiredOption != 0);
 
 
-    static void displayMainMenu() {
+        }
+
+
+
+
+    static void displayMainMenu () {
         System.out.println("\n\n\t\t(a) Press 0 to Exit.");
         System.out.println("\t\t(b) Press 1 to Login as admin.");
         System.out.println("\t\t(c) Press 2 to Register as admin.");
+        System.out.println("\t\t(d) Press 3 to Login as Passenger.");
+        System.out.println("\t\t(e) Press 4 to Register as Passenger.");
     }
-
 }

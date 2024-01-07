@@ -21,8 +21,10 @@ public class Customer {
         this.age = 0;
     }
     Customer(String name, String email, String password, String phone, String address, int age) {
-
+        RandomGenerator random = new RandomGenerator();
+        random.randomIDGen();
         this.name = name;
+        this.userID = random.getRandomNumber();
         this.email = email;
         this.password = password;
         this.phone = phone;
@@ -104,6 +106,34 @@ public class Customer {
         int age = read.nextInt();
         customerCollection.add(new Customer(name, email, password, phone, address, age));
     }
+    void displayHeader() {
+        System.out.println();
+        System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
+        System.out.printf("%10s| SerialNum  |   UserID   | Passenger Names                  | Age     | EmailID\t\t       | Home Address\t\t\t     | Phone Number\t       |%n", "");
+        System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
+        System.out.println();
+
+    }
+    public void searchUser(String ID) {
+        boolean isFound = false;
+        Customer customerWithTheID = customerCollection.get(0);
+        for (Customer c : customerCollection) {
+            if (ID.equals(c.getUserID())) {
+                System.out.printf("%-50sCustomer Found...!!!Here is the Full Record...!!!\n\n\n", " ");
+                displayHeader();
+                isFound = true;
+                customerWithTheID = c;
+                break;
+            }
+        }
+        if (isFound) {
+            System.out.println(customerWithTheID.toString(1));
+            System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
+        } else {
+            System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", ID);
+        }
+    }
+
     String randomIDDisplay(String randomID) {
         StringBuilder newString = new StringBuilder();
         for (int i = 0; i <= randomID.length(); i++) {
@@ -116,7 +146,7 @@ public class Customer {
         return newString.toString();
     }
     public void displayCustomersData() {
-
+        displayHeader();
         Iterator<Customer> iterator = customerCollection.iterator();
         int i = 0;
         while (iterator.hasNext()) {
