@@ -156,4 +156,49 @@ public class Customer {
             System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
         }
     }
+
+    public void editUserInfo(String ID) {
+        boolean isFound = false;
+        Scanner read = new Scanner(System.in);
+        for (Customer c : customerCollection) {
+            if (ID.equals(c.getUserID())) {
+                isFound = true;
+                System.out.print("\nEnter the new name of the Passenger:\t");
+                String name = read.nextLine();
+                c.setName(name);
+                System.out.print("Enter the new email address of Passenger " + name + ":\t");
+                c.setEmail(read.nextLine());
+                System.out.print("Enter the new Phone number of Passenger " + name + ":\t");
+                c.setPhone(read.nextLine());
+                System.out.print("Enter the new address of Passenger " + name + ":\t");
+                c.setAddress(read.nextLine());
+                System.out.print("Enter the new age of Passenger " + name + ":\t");
+                c.setAge(read.nextInt());
+                displayCustomersData();
+                break;
+            }
+        }
+        if (!isFound) {
+            System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", ID);
+        }
+    }
+
+    public void deleteUser(String ID) {
+        boolean isFound = false;
+        Iterator<Customer> iterator = customerCollection.iterator();
+        while (iterator.hasNext()) {
+            Customer customer = iterator.next();
+            if (ID.equals(customer.getUserID())) {
+                isFound = true;
+                break;
+            }
+        }
+        if (isFound) {
+            iterator.remove();
+            System.out.printf("\n%-50sPrinting all  Customer's Data after deleting Customer with the ID %s.....!!!!\n", "", ID);
+            displayCustomersData();
+        } else {
+            System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", ID);
+        }
+    }
 }

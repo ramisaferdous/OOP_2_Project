@@ -14,6 +14,8 @@ public class User{
         Train t1 = new Train();
         Customer c1 = new Customer();
         Scanner read = new Scanner(System.in);
+
+
         System.out.println("\n\t\t\t\t\t+++++++++++++ Welcome to BD Railway  +++++++++++++\n\nTo Further Proceed, Please enter a value.");
         System.out.println("\n***** Default Username && Password is xyz-xyz ***** Using Default Credentials will restrict you to just view the list of Passengers....\n");
         displayMainMenu();
@@ -62,18 +64,40 @@ public class User{
                         c1.searchUser(customerID);
 
                     }
+                    else if (desiredOption == 3) {
+                        c1.displayCustomersData();
+                        System.out.print("Enter the CustomerID to Update its Data :\t");
+                        String customerID = read1.nextLine();
+                        if (customersCollection.size() > 0) {
+                            c1.editUserInfo(customerID);
+                        } else {
+                            System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", customerID);
+                        }
                 }
-                while (desiredOption != 0);
-                }
+                    else if (desiredOption == 4) {
+                        c1.displayCustomersData();
+                        System.out.print("Enter the CustomerID to Delete its Data :\t");
+                        String customerID = read1.nextLine();
+                        if (customersCollection.size() > 0) {
+                            c1.deleteUser(customerID);
+                        } else {
+                            System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", customerID);
+                        }
+                    }
+
+                }while (desiredOption != 0);
             }
+
+        }
             else if (desiredOption == 2)
             {
             }
-        }
-            while (desiredOption != 0);
 
 
-        }
+
+        } while (desiredOption != 0);
+    }
+
 
 
 
