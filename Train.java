@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Train {
+public class Train extends TrainDistance {
     private final String TrainSchedule;
     private final String TrainNumber;
     private final String fromWhichCity;
@@ -9,7 +10,7 @@ public class Train {
     private final String toWhichCity;
     private double distanceInMiles;
     private double distanceInKm;
-    private String Time;
+    private String TrainTime;
     private int numOfSeatsInTheTrain;
     private List<Customer> listOfRegisteredCustomersInATrain;
     private int customerIndex;
@@ -33,10 +34,11 @@ public class Train {
         this.toWhichCity = chosenDestinations[1][0];
         this.distanceInMiles = Double.parseDouble(distanceBetweenTheCities[0]);
         this.distanceInKm = Double.parseDouble(distanceBetweenTheCities[1]);
-        this.Time = calculateTrainTime(distanceInMiles);
+        this.TrainTime = calculateTrainTime(distanceInMiles);
         this.listOfRegisteredCustomersInATrain = new ArrayList<>();
         this.platform = platform;
     }
+
 
     public String calculateTrainTime(double distanceBetweenTheCities) {
         double groundSpeed = 450;
@@ -65,5 +67,92 @@ public class Train {
         } else {
             return String.format("%s:%s", hours, minutes);
         }
+    }
+
+    boolean isCustomerAlreadyAdded(List<Customer> customersList, Customer customer) {
+        boolean isAdded = false;
+        for (Customer customer1 : customersList) {
+            if (customer1.getUserID().equals(customer.getUserID())) {
+                isAdded = true;
+                customerIndex = customersList.indexOf(customer1);
+                break;
+            }
+        }
+        return isAdded;
+    }
+
+    void addNewCustomerToFlight(Customer customer) {
+        this.listOfRegisteredCustomersInATrain.add(customer);
+    }
+
+
+    public void displayTrainSchedule() {
+
+        Iterator<Train> TrainIterator = TRAIN_LIST.iterator();
+        System.out.println();
+        System.out.print("+------+-------------------------------------------+-----------+------------------+-----------------------+------------------------+---------------------------+-------------+--------+------------------------+\n");
+        System.out.printf("| Num  | Train SCHEDULE\t\t\t   | Train NO | Available Seats  | \tFROM ====>>       | \t====>> TO\t   | \t  Train TIME |  GATE  |   DISTANCE(MILES/KMS)  |%n");
+        System.out.print("+------+-------------------------------------------+-----------+------------------+-----------------------+------------------------+---------------------------+-------------+--------+------------------------+\n");
+        int i = 0;
+        while (TrainIterator.hasNext()) {
+            i++;
+            Train t1 = TrainIterator.next();
+            System.out.println(t1.toString(i));
+            System.out.print("+------+-------------------------------------------+-----------+------------------+-----------------------+------------------------+---------------------------+-------------+--------+------------------------+\n");
+        }
+    }
+    @Override
+    public String toString(int i) {
+        return String.format("| %-5d| %-41s | %-9s | \t%-9s | %-21s | %-22s  |   %-6sHrs |  %-4s  |  %-8s / %-11s|", i, TrainSchedule, TrainNumber, numOfSeatsInTheTrain, fromWhichCity, toWhichCity, TrainTime, platform, distanceInMiles, distanceInKm);
+    }
+
+    public int getNoOfSeats() {
+        return numOfSeatsInTheTrain;
+    }
+
+    public List<Train> getTrainList() {
+        return TRAIN_LIST;
+    }
+
+    public List<Customer> getListOfRegisteredCustomersInATrain() {
+        return listOfRegisteredCustomersInATrain;
+    }
+
+    public String getTrainNumber() {
+        return TrainNumber;
+    }
+    public String getplatform() {
+        return platform;
+    }
+
+    public void setNoOfSeatsInTheTrain(int numOfSeatsInTheTrain) {
+        this.numOfSeatsInTheTrain = numOfSeatsInTheTrain;
+    }
+
+    public void addNewCustomerTotrain(Customer customer) {
+
+        this.listOfRegisteredCustomersInATrain.add(customer);
+    }
+
+
+
+    public String getTrainSchedule() {
+        return TrainSchedule;
+    }
+
+    public String getFromWhichCity() {
+        return fromWhichCity;
+    }
+
+    public void setNoOfSeatsInThetrain(int numOfSeatsInTheTrain) {
+        this.numOfSeatsInTheTrain = numOfSeatsInTheTrain;
+    }
+
+    public String gettrainTime() {
+        return TrainTime;
+    }
+
+    public String getToWhichCity() {
+        return toWhichCity;
     }
 }

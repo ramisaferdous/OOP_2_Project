@@ -7,7 +7,7 @@ public class Customer {
     private final String password;
     private String address;
     private int age;
-    //    public List<Flight> flightsRegisteredByUser;
+        public List<Train> trainsRegisteredByUser;
     public List<Integer> numOfTicketsBookedByUser;
      public static final List<Customer> customerCollection = User.getCustomersCollection();
 
@@ -33,7 +33,9 @@ public class Customer {
         this.numOfTicketsBookedByUser = new ArrayList<>();
     }
 
-
+    public List<Train> gettrainsRegisteredByUser() {
+        return trainsRegisteredByUser;
+    }
     public String getPassword() {
         return password;
     }
@@ -81,6 +83,7 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
 
     public void setAge(int age) {
         this.age = age;
@@ -200,5 +203,13 @@ public class Customer {
         } else {
             System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", ID);
         }
+    }
+    void addExistingtrainToCustomerList(int index, int numOfTickets) {
+        int newNumOfTickets = numOfTicketsBookedByUser.get(index) + numOfTickets;
+        this.numOfTicketsBookedByUser.set(index, newNumOfTickets);
+    }
+    void addNewtrainToCustomerList(Train t) {
+        this.trainsRegisteredByUser.add(t);
+//        numOfFlights++;
     }
 }
